@@ -1,0 +1,846 @@
+{
+  "document_id": "isa-sencilla-en-do-001",
+  "instrument": {
+    "name": "Timple Canario",
+    "tuning": {
+      "1": 74,
+      "2": 69,
+      "3": 64,
+      "4": 72,
+      "5": 67
+    }
+  },
+  "measures": [
+    {
+      "measure_number": 1,
+      "events": [
+        {
+          "event_id": "evt-001",
+          "start_time": 0,
+          "duration": "8th",
+          "omr_confidence": {
+            "pitch": 0.95,
+            "rhythm": 0.92
+          },
+          "musical_data": {
+            "pitch_name": "C5",
+            "midi_note": 72
+          },
+          "tab_data": {
+            "selected": {
+              "string": 2,
+              "fret": 3
+            },
+            "is_user_locked": false,
+            "alternatives": [
+              {
+                "string": 3,
+                "fret": 8
+              },
+              {
+                "string": 4,
+                "fret": 0
+              },
+              {
+                "string": 5,
+                "fret": 5
+              }
+            ]
+          }
+        },
+        {
+          "event_id": "evt-002",
+          "start_time": 0.5,
+          "duration": "8th",
+          "omr_confidence": {
+            "pitch": 0.95,
+            "rhythm": 0.92
+          },
+          "musical_data": {
+            "pitch_name": "D5",
+            "midi_note": 74
+          },
+          "tab_data": {
+            "selected": {
+              "string": 2,
+              "fret": 5
+            },
+            "is_user_locked": false,
+            "alternatives": [
+              {
+                "string": 1,
+                "fret": 0
+              },
+              {
+                "string": 3,
+                "fret": 10
+              },
+              {
+                "string": 4,
+                "fret": 2
+              },
+              {
+                "string": 5,
+                "fret": 7
+              }
+            ]
+          }
+        },
+        {
+          "event_id": "evt-003",
+          "start_time": 1,
+          "duration": "8th",
+          "omr_confidence": {
+            "pitch": 0.95,
+            "rhythm": 0.92
+          },
+          "musical_data": {
+            "pitch_name": "E5",
+            "midi_note": 76
+          },
+          "tab_data": {
+            "selected": {
+              "string": 2,
+              "fret": 7
+            },
+            "is_user_locked": false,
+            "alternatives": [
+              {
+                "string": 1,
+                "fret": 2
+              },
+              {
+                "string": 3,
+                "fret": 12
+              },
+              {
+                "string": 4,
+                "fret": 4
+              },
+              {
+                "string": 5,
+                "fret": 9
+              }
+            ]
+          }
+        },
+        {
+          "event_id": "evt-004",
+          "start_time": 1.5,
+          "duration": "8th",
+          "omr_confidence": {
+            "pitch": 0.95,
+            "rhythm": 0.7
+          },
+          "musical_data": {
+            "pitch_name": "F5",
+            "midi_note": 77
+          },
+          "tab_data": {
+            "selected": {
+              "string": 2,
+              "fret": 8
+            },
+            "is_user_locked": false,
+            "alternatives": [
+              {
+                "string": 1,
+                "fret": 3
+              },
+              {
+                "string": 4,
+                "fret": 5
+              },
+              {
+                "string": 5,
+                "fret": 10
+              }
+            ]
+          }
+        },
+        {
+          "event_id": "evt-005",
+          "start_time": 2,
+          "duration": "8th",
+          "omr_confidence": {
+            "pitch": 0.95,
+            "rhythm": 0.92
+          },
+          "musical_data": {
+            "pitch_name": "G5",
+            "midi_note": 79
+          },
+          "tab_data": {
+            "selected": {
+              "string": 2,
+              "fret": 10
+            },
+            "is_user_locked": false,
+            "alternatives": [
+              {
+                "string": 1,
+                "fret": 5
+              },
+              {
+                "string": 4,
+                "fret": 7
+              },
+              {
+                "string": 5,
+                "fret": 12
+              }
+            ]
+          }
+        },
+        {
+          "event_id": "evt-006",
+          "start_time": 2.5,
+          "duration": "8th",
+          "omr_confidence": {
+            "pitch": 0.95,
+            "rhythm": 0.92
+          },
+          "musical_data": {
+            "pitch_name": "F5",
+            "midi_note": 77
+          },
+          "tab_data": {
+            "selected": {
+              "string": 2,
+              "fret": 8
+            },
+            "is_user_locked": false,
+            "alternatives": [
+              {
+                "string": 1,
+                "fret": 3
+              },
+              {
+                "string": 4,
+                "fret": 5
+              },
+              {
+                "string": 5,
+                "fret": 10
+              }
+            ]
+          }
+        },
+        {
+          "event_id": "evt-007",
+          "start_time": 3,
+          "duration": "8th",
+          "omr_confidence": {
+            "pitch": 0.95,
+            "rhythm": 0.92
+          },
+          "musical_data": {
+            "pitch_name": "E5",
+            "midi_note": 76
+          },
+          "tab_data": {
+            "selected": {
+              "string": 2,
+              "fret": 7
+            },
+            "is_user_locked": false,
+            "alternatives": [
+              {
+                "string": 1,
+                "fret": 2
+              },
+              {
+                "string": 3,
+                "fret": 12
+              },
+              {
+                "string": 4,
+                "fret": 4
+              },
+              {
+                "string": 5,
+                "fret": 9
+              }
+            ]
+          }
+        },
+        {
+          "event_id": "evt-008",
+          "start_time": 3.5,
+          "duration": "8th",
+          "omr_confidence": {
+            "pitch": 0.95,
+            "rhythm": 0.92
+          },
+          "musical_data": {
+            "pitch_name": "D5",
+            "midi_note": 74
+          },
+          "tab_data": {
+            "selected": {
+              "string": 2,
+              "fret": 5
+            },
+            "is_user_locked": false,
+            "alternatives": [
+              {
+                "string": 1,
+                "fret": 0
+              },
+              {
+                "string": 3,
+                "fret": 10
+              },
+              {
+                "string": 4,
+                "fret": 2
+              },
+              {
+                "string": 5,
+                "fret": 7
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "measure_number": 2,
+      "events": [
+        {
+          "event_id": "evt-009",
+          "start_time": 0,
+          "duration": "quarter",
+          "omr_confidence": {
+            "pitch": 0.95,
+            "rhythm": 0.92
+          },
+          "musical_data": {
+            "pitch_name": "C5",
+            "midi_note": 72
+          },
+          "tab_data": {
+            "selected": {
+              "string": 2,
+              "fret": 3
+            },
+            "is_user_locked": false,
+            "alternatives": [
+              {
+                "string": 3,
+                "fret": 8
+              },
+              {
+                "string": 4,
+                "fret": 0
+              },
+              {
+                "string": 5,
+                "fret": 5
+              }
+            ]
+          }
+        },
+        {
+          "event_id": "evt-010",
+          "start_time": 1,
+          "duration": "8th",
+          "omr_confidence": {
+            "pitch": 0.95,
+            "rhythm": 0.92
+          },
+          "musical_data": {
+            "pitch_name": "E5",
+            "midi_note": 76
+          },
+          "tab_data": {
+            "selected": {
+              "string": 2,
+              "fret": 7
+            },
+            "is_user_locked": false,
+            "alternatives": [
+              {
+                "string": 1,
+                "fret": 2
+              },
+              {
+                "string": 3,
+                "fret": 12
+              },
+              {
+                "string": 4,
+                "fret": 4
+              },
+              {
+                "string": 5,
+                "fret": 9
+              }
+            ]
+          }
+        },
+        {
+          "event_id": "evt-011",
+          "start_time": 1.5,
+          "duration": "8th",
+          "omr_confidence": {
+            "pitch": 0.95,
+            "rhythm": 0.92
+          },
+          "musical_data": {
+            "pitch_name": "G5",
+            "midi_note": 79
+          },
+          "tab_data": {
+            "selected": {
+              "string": 2,
+              "fret": 10
+            },
+            "is_user_locked": false,
+            "alternatives": [
+              {
+                "string": 1,
+                "fret": 5
+              },
+              {
+                "string": 4,
+                "fret": 7
+              },
+              {
+                "string": 5,
+                "fret": 12
+              }
+            ]
+          }
+        },
+        {
+          "event_id": "evt-012",
+          "start_time": 2,
+          "duration": "quarter",
+          "omr_confidence": {
+            "pitch": 0.95,
+            "rhythm": 0.92
+          },
+          "musical_data": {
+            "pitch_name": "C6",
+            "midi_note": 84
+          },
+          "tab_data": {
+            "selected": {
+              "string": 1,
+              "fret": 10
+            },
+            "is_user_locked": false,
+            "alternatives": [
+              {
+                "string": 4,
+                "fret": 12
+              }
+            ]
+          }
+        },
+        {
+          "event_id": "evt-013",
+          "start_time": 3,
+          "duration": "8th",
+          "omr_confidence": {
+            "pitch": 0.95,
+            "rhythm": 0.92
+          },
+          "musical_data": {
+            "pitch_name": "G5",
+            "midi_note": 79
+          },
+          "tab_data": {
+            "selected": {
+              "string": 2,
+              "fret": 10
+            },
+            "is_user_locked": false,
+            "alternatives": [
+              {
+                "string": 1,
+                "fret": 5
+              },
+              {
+                "string": 4,
+                "fret": 7
+              },
+              {
+                "string": 5,
+                "fret": 12
+              }
+            ]
+          }
+        },
+        {
+          "event_id": "evt-014",
+          "start_time": 3.5,
+          "duration": "8th",
+          "omr_confidence": {
+            "pitch": 0.95,
+            "rhythm": 0.92
+          },
+          "musical_data": {
+            "pitch_name": "E5",
+            "midi_note": 76
+          },
+          "tab_data": {
+            "selected": {
+              "string": 2,
+              "fret": 7
+            },
+            "is_user_locked": false,
+            "alternatives": [
+              {
+                "string": 1,
+                "fret": 2
+              },
+              {
+                "string": 3,
+                "fret": 12
+              },
+              {
+                "string": 4,
+                "fret": 4
+              },
+              {
+                "string": 5,
+                "fret": 9
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "measure_number": 3,
+      "events": [
+        {
+          "event_id": "evt-015",
+          "start_time": 0,
+          "duration": "8th",
+          "omr_confidence": {
+            "pitch": 0.95,
+            "rhythm": 0.92
+          },
+          "musical_data": {
+            "pitch_name": "C5",
+            "midi_note": 72
+          },
+          "tab_data": {
+            "selected": {
+              "string": 4,
+              "fret": 0
+            },
+            "is_user_locked": false,
+            "alternatives": [
+              {
+                "string": 2,
+                "fret": 3
+              },
+              {
+                "string": 3,
+                "fret": 8
+              },
+              {
+                "string": 5,
+                "fret": 5
+              }
+            ]
+          }
+        },
+        {
+          "event_id": "evt-016",
+          "start_time": 0.5,
+          "duration": "8th",
+          "omr_confidence": {
+            "pitch": 0.95,
+            "rhythm": 0.92
+          },
+          "musical_data": {
+            "pitch_name": "G4",
+            "midi_note": 67
+          },
+          "tab_data": {
+            "selected": {
+              "string": 5,
+              "fret": 0
+            },
+            "is_user_locked": false,
+            "alternatives": [
+              {
+                "string": 3,
+                "fret": 3
+              }
+            ]
+          }
+        },
+        {
+          "event_id": "evt-017",
+          "start_time": 1,
+          "duration": "quarter",
+          "omr_confidence": {
+            "pitch": 0.78,
+            "rhythm": 0.92
+          },
+          "musical_data": {
+            "pitch_name": "E4",
+            "midi_note": 64
+          },
+          "tab_data": {
+            "selected": {
+              "string": 3,
+              "fret": 0
+            },
+            "is_user_locked": false,
+            "alternatives": []
+          }
+        },
+        {
+          "event_id": "evt-018",
+          "start_time": 2,
+          "duration": "8th",
+          "omr_confidence": {
+            "pitch": 0.95,
+            "rhythm": 0.92
+          },
+          "musical_data": {
+            "pitch_name": "G4",
+            "midi_note": 67
+          },
+          "tab_data": {
+            "selected": {
+              "string": 5,
+              "fret": 0
+            },
+            "is_user_locked": false,
+            "alternatives": [
+              {
+                "string": 3,
+                "fret": 3
+              }
+            ]
+          }
+        },
+        {
+          "event_id": "evt-019",
+          "start_time": 2.5,
+          "duration": "8th",
+          "omr_confidence": {
+            "pitch": 0.95,
+            "rhythm": 0.92
+          },
+          "musical_data": {
+            "pitch_name": "A4",
+            "midi_note": 69
+          },
+          "tab_data": {
+            "selected": {
+              "string": 2,
+              "fret": 0
+            },
+            "is_user_locked": false,
+            "alternatives": [
+              {
+                "string": 3,
+                "fret": 5
+              },
+              {
+                "string": 5,
+                "fret": 2
+              }
+            ]
+          }
+        },
+        {
+          "event_id": "evt-020",
+          "start_time": 3,
+          "duration": "8th",
+          "omr_confidence": {
+            "pitch": 0.95,
+            "rhythm": 0.92
+          },
+          "musical_data": {
+            "pitch_name": "C5",
+            "midi_note": 72
+          },
+          "tab_data": {
+            "selected": {
+              "string": 4,
+              "fret": 0
+            },
+            "is_user_locked": false,
+            "alternatives": [
+              {
+                "string": 2,
+                "fret": 3
+              },
+              {
+                "string": 3,
+                "fret": 8
+              },
+              {
+                "string": 5,
+                "fret": 5
+              }
+            ]
+          }
+        },
+        {
+          "event_id": "evt-021",
+          "start_time": 3.5,
+          "duration": "8th",
+          "omr_confidence": {
+            "pitch": 0.95,
+            "rhythm": 0.92
+          },
+          "musical_data": {
+            "pitch_name": "D5",
+            "midi_note": 74
+          },
+          "tab_data": {
+            "selected": {
+              "string": 1,
+              "fret": 0
+            },
+            "is_user_locked": false,
+            "alternatives": [
+              {
+                "string": 2,
+                "fret": 5
+              },
+              {
+                "string": 3,
+                "fret": 10
+              },
+              {
+                "string": 4,
+                "fret": 2
+              },
+              {
+                "string": 5,
+                "fret": 7
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "measure_number": 4,
+      "events": [
+        {
+          "event_id": "evt-022",
+          "start_time": 0,
+          "duration": "quarter",
+          "omr_confidence": {
+            "pitch": 0.95,
+            "rhythm": 0.92
+          },
+          "musical_data": {
+            "pitch_name": "E5",
+            "midi_note": 76
+          },
+          "tab_data": {
+            "selected": {
+              "string": 1,
+              "fret": 2
+            },
+            "is_user_locked": false,
+            "alternatives": [
+              {
+                "string": 2,
+                "fret": 7
+              },
+              {
+                "string": 3,
+                "fret": 12
+              },
+              {
+                "string": 4,
+                "fret": 4
+              },
+              {
+                "string": 5,
+                "fret": 9
+              }
+            ]
+          }
+        },
+        {
+          "event_id": "evt-023",
+          "start_time": 1,
+          "duration": "quarter",
+          "omr_confidence": {
+            "pitch": 0.95,
+            "rhythm": 0.92
+          },
+          "musical_data": {
+            "pitch_name": "D5",
+            "midi_note": 74
+          },
+          "tab_data": {
+            "selected": {
+              "string": 1,
+              "fret": 0
+            },
+            "is_user_locked": false,
+            "alternatives": [
+              {
+                "string": 2,
+                "fret": 5
+              },
+              {
+                "string": 3,
+                "fret": 10
+              },
+              {
+                "string": 4,
+                "fret": 2
+              },
+              {
+                "string": 5,
+                "fret": 7
+              }
+            ]
+          }
+        },
+        {
+          "event_id": "evt-024",
+          "start_time": 2,
+          "duration": "half",
+          "omr_confidence": {
+            "pitch": 0.95,
+            "rhythm": 0.92
+          },
+          "musical_data": {
+            "pitch_name": "C5",
+            "midi_note": 72
+          },
+          "tab_data": {
+            "selected": {
+              "string": 4,
+              "fret": 0
+            },
+            "is_user_locked": false,
+            "alternatives": [
+              {
+                "string": 2,
+                "fret": 3
+              },
+              {
+                "string": 3,
+                "fret": 8
+              },
+              {
+                "string": 5,
+                "fret": 5
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -23,4 +23,11 @@ export type CostConfig = {
   readonly stretchPenaltyBase: number;
   readonly adjacentStringCost: number;
   readonly jumpStringCostPerStep: number;
+  /**
+   * Tiny per-position cost equal to `lowFretBias * fret`. Acts as a tiebreaker
+   * that favors lower frets (and open strings in particular) when the routing
+   * cost is otherwise identical. Should be small enough that it never overrides
+   * a real ergonomic decision — the default 1e-6 is far below any other cost.
+   */
+  readonly lowFretBias: number;
 };

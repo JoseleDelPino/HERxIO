@@ -7,7 +7,12 @@ export const DEFAULT_COST_CONFIG: CostConfig = Object.freeze({
   stretchPenaltyBase: 2,
   adjacentStringCost: 1,
   jumpStringCostPerStep: 2,
+  lowFretBias: 1e-6,
 });
+
+function positionCost(p: Position, cfg: CostConfig): number {
+  return p.fret * cfg.lowFretBias;
+}
 
 /**
  * Cost of moving the fretting hand from `prev` to `next`.
@@ -80,15 +85,17 @@ export function routeMonophonic(
   const back: number[][] = candidates.map((row) => row.map(() => -1));
 
   for (let j = 0; j < candidates[0].length; j++) {
-    dp[0][j] = 0;
+    dp[0][j] = positionCost(candidates[0][j], cfg);
   }
 
   for (let i = 1; i < n; i++) {
     for (let j = 0; j < candidates[i].length; j++) {
+      const here = positionCost(candidates[i][j], cfg);
       let bestCost = Infinity;
       let bestPrev = -1;
       for (let k = 0; k < candidates[i - 1].length; k++) {
-        const cost = dp[i - 1][k] + transitionCost(candidates[i - 1][k], candidates[i][j], cfg);
+        const cost =
+          dp[i - 1][k] + transitionCost(candidates[i - 1][k], candidates[i][j], cfg) + here;
         if (cost < bestCost) {
           bestCost = cost;
           bestPrev = k;
