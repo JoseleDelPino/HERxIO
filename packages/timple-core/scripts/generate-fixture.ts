@@ -10,12 +10,12 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { buildMockDocument } from '../src/domain/timple/document';
-import { ISA_SENCILLA_EN_DO } from '../src/domain/timple/samples';
+import { buildMockDocument } from '../src/document';
+import { ISA_SENCILLA_EN_DO } from '../src/samples';
 
 const here = dirname(fileURLToPath(import.meta.url));
-const repoRoot = resolve(here, '..');
-const outPath = resolve(repoRoot, 'fixtures/timple-mock-melody.json');
+const packageRoot = resolve(here, '..');
+const outPath = resolve(packageRoot, 'fixtures/timple-mock-melody.json');
 
 const document = buildMockDocument(ISA_SENCILLA_EN_DO, {
   documentId: 'isa-sencilla-en-do-001',
