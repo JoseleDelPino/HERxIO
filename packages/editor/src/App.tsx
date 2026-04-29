@@ -1,7 +1,8 @@
-import { useEffect, useReducer, useMemo } from 'react';
+import { useEffect, useReducer, useMemo, useCallback } from 'react';
 import {
   ISA_SENCILLA_EN_DO,
   buildMockDocument,
+  type DurationCode,
   type StringNumber,
 } from '@herxio/timple-core';
 import { MeasureView } from './components/MeasureView';
@@ -11,7 +12,26 @@ import {
   initialEditorState,
 } from './state/editorState';
 
-const STRING_KEYS = new Set(['1', '2', '3', '4', '5']);
+const DIGIT_CODES = new Set([
+  'Digit1',
+  'Digit2',
+  'Digit3',
+  'Digit4',
+  'Digit5',
+]);
+
+/**
+ * NumPad → duration mapping. Smallest number = shortest note (most subdivision),
+ * which mirrors how staff editors expose tuplet shortcuts.
+ */
+const NUMPAD_DURATIONS: Record<string, DurationCode> = {
+  Numpad1: '16th',
+  Numpad2: '8th',
+  Numpad3: 'quarter',
+  Numpad4: 'half',
+  Numpad5: 'whole',
+};
+
 const FLASH_DURATION_MS = 600;
 
 export function App() {
@@ -46,9 +66,15 @@ export function App() {
         return;
       }
       if (!state.selectedId) return;
-      if (STRING_KEYS.has(event.key)) {
-        const stringNumber = Number(event.key) as StringNumber;
+      if (DIGIT_CODES.has(event.code)) {
+        const stringNumber = Number(event.code.slice(-1)) as StringNumber;
         dispatch({ type: 'change-string', id: state.selectedId, string: stringNumber });
+        event.preventDefault();
+        return;
+      }
+      const duration = NUMPAD_DURATIONS[event.code];
+      if (duration) {
+        dispatch({ type: 'change-duration', id: state.selectedId, duration });
         event.preventDefault();
         return;
       }
@@ -60,6 +86,13 @@ export function App() {
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [state.selectedId]);
+
+  const handleDragNote = useCallback(
+    (eventId: string, targetString: StringNumber) => {
+      dispatch({ type: 'change-string', id: eventId, string: targetString });
+    },
+    [],
+  );
 
   const totalEvents = state.doc.measures.reduce(
     (sum, m) => sum + m.events.length,
@@ -87,8 +120,12 @@ export function App() {
             Confianza OMR &lt; 0.85
           </span>
           <span>
-            <kbd>1</kbd>–<kbd>5</kbd> mover a cuerda · <kbd>L</kbd> toggle bloqueo ·{' '}
-            <kbd>Esc</kbd> deseleccionar · click chip → alternativas
+            <kbd>1</kbd>–<kbd>5</kbd> mover a cuerda · <kbd>L</kbd> bloqueo ·{' '}
+            <kbd>Esc</kbd> deseleccionar
+          </span>
+          <span>
+            <kbd>Num1</kbd>–<kbd>Num5</kbd> duración (16th → whole) · arrastrar
+            número del tab a otra cuerda
           </span>
         </div>
       </header>
@@ -99,7 +136,13 @@ export function App() {
               <h2 className="measure__title">Compás {measure.measure_number}</h2>
               <p className="measure__events">{measure.events.length} eventos</p>
             </div>
-            <MeasureView measure={measure} isFirst={idx === 0} />
+            <MeasureView
+              measure={measure}
+              isFirst={idx === 0}
+              flashId={state.invalidFlashId}
+              onSelect={(id) => dispatch({ type: 'select', id })}
+              onDragNote={handleDragNote}
+            />
             <EditRow
               measure={measure}
               selectedId={state.selectedId}

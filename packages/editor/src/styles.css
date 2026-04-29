@@ -91,8 +91,47 @@ body {
 }
 
 .measure__canvas {
+  position: relative;
   width: 100%;
   overflow-x: auto;
+}
+
+.vf-tabnote {
+  cursor: grab;
+}
+
+.vf-tabnote:hover text {
+  fill: var(--accent);
+}
+
+.vf-tabnote--dragging {
+  cursor: grabbing;
+  opacity: 0.55;
+}
+
+.vf-tabnote--flash text {
+  fill: #c33;
+  font-weight: 700;
+}
+
+.drag-hint {
+  position: fixed;
+  background: white;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  border-radius: 4px;
+  padding: 3px 8px;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 11px;
+  pointer-events: none;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.drag-hint--invalid {
+  border-color: #c33;
+  color: #c33;
+  background: #fde2e2;
 }
 
 kbd {
