@@ -187,3 +187,51 @@ export function buildMockDocument(
     measures,
   };
 }
+
+/**
+ * Re-routes an existing document without changing the underlying melody.
+ *
+ * Events whose `tab_data.is_user_locked` is true are pinned at their current
+ * `selected` position; the routing engine treats them as constants and
+ * recomputes the cheapest path through the rest. Each event's
+ * `alternatives` is regenerated from the resulting selection, so the editor
+ * can immediately show the new "other places this pitch could go" set.
+ *
+ * Use this whenever the user makes a manual edit (drag, alternative pick)
+ * and the surrounding passage should re-flow around it.
+ */
+export function routeDocument(
+  doc: TimpleDocument,
+  tuning: TimpleTuning = new TimpleTuning(),
+): TimpleDocument {
+  const flatEvents: DocumentEvent[] = doc.measures.flatMap((m) => m.events);
+
+  const routingInput: RoutingNote[] = flatEvents.map((e) => ({
+    id: e.event_id,
+    midi: e.musical_data.midi_note,
+    ...(e.tab_data.is_user_locked ? { lockedPosition: e.tab_data.selected } : {}),
+  }));
+  const { positions } = routeMonophonic(routingInput, tuning);
+
+  let cursor = 0;
+  const measures: DocumentMeasure[] = doc.measures.map((m) => ({
+    measure_number: m.measure_number,
+    events: m.events.map((e) => {
+      const newSelected = positions[cursor++];
+      const allPlayable = findPositions(e.musical_data.midi_note, tuning);
+      const alternatives = allPlayable.filter(
+        (p) => !(p.string === newSelected.string && p.fret === newSelected.fret),
+      );
+      return {
+        ...e,
+        tab_data: {
+          ...e.tab_data,
+          selected: newSelected,
+          alternatives,
+        },
+      };
+    }),
+  }));
+
+  return { ...doc, measures };
+}

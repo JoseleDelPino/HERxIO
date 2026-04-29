@@ -21,5 +21,10 @@ export type {
   MockNoteInput,
   BuildOptions,
 } from './document';
-export { DURATION_BEATS, midiToPitchName, buildMockDocument } from './document';
+export {
+  DURATION_BEATS,
+  midiToPitchName,
+  buildMockDocument,
+  routeDocument,
+} from './document';
 export { ISA_SENCILLA_EN_DO } from './samples';

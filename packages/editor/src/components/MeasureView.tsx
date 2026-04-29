@@ -10,6 +10,7 @@ import {
   Voice,
 } from 'vexflow';
 import type { DocumentEvent, DocumentMeasure, DurationCode } from '@herxio/timple-core';
+import { isLowConfidence, WARNING_COLOR } from '../utils/confidence';
 
 const VEX_DURATION: Record<DurationCode, string> = {
   whole: 'w',
@@ -19,9 +20,6 @@ const VEX_DURATION: Record<DurationCode, string> = {
   '16th': '16',
 };
 
-const LOW_CONFIDENCE_THRESHOLD = 0.85;
-const WARNING_COLOR = '#d4a017';
-
 function pitchToVexKey(pitchName: string): { key: string; accidental: string | null } {
   const isSharp = pitchName.includes('#');
   const root = pitchName[0].toLowerCase();
@@ -30,13 +28,6 @@ function pitchToVexKey(pitchName: string): { key: string; accidental: string | n
     key: `${root}${isSharp ? '#' : ''}/${octave}`,
     accidental: isSharp ? '#' : null,
   };
-}
-
-function isLowConfidence(event: DocumentEvent): boolean {
-  return (
-    event.omr_confidence.pitch < LOW_CONFIDENCE_THRESHOLD ||
-    event.omr_confidence.rhythm < LOW_CONFIDENCE_THRESHOLD
-  );
 }
 
 function buildStaveNote(event: DocumentEvent): StaveNote {
@@ -116,26 +107,5 @@ export function MeasureView({ measure, isFirst }: MeasureViewProps) {
     tabVoice.draw(ctx, tabStave);
   }, [measure, isFirst]);
 
-  const lowConfidenceEvents = measure.events.filter(isLowConfidence);
-
-  return (
-    <section className="measure">
-      <div className="measure__heading">
-        <h2 className="measure__title">Compás {measure.measure_number}</h2>
-        <p className="measure__events">{measure.events.length} eventos</p>
-      </div>
-      <div className="measure__canvas" ref={containerRef} />
-      {lowConfidenceEvents.length > 0 && (
-        <div className="measure__warnings">
-          {lowConfidenceEvents.map((event) => (
-            <span key={event.event_id} className="warning-pill">
-              {event.musical_data.pitch_name} · pitch{' '}
-              {event.omr_confidence.pitch.toFixed(2)} · ritmo{' '}
-              {event.omr_confidence.rhythm.toFixed(2)}
-            </span>
-          ))}
-        </div>
-      )}
-    </section>
-  );
+  return <div className="measure__canvas" ref={containerRef} />;
 }

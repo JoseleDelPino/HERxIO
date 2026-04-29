@@ -3,7 +3,9 @@ import {
   DURATION_BEATS,
   buildMockDocument,
   midiToPitchName,
+  routeDocument,
   type MockNoteInput,
+  type TimpleDocument,
 } from './document';
 import { findPositions } from './fretboard';
 import { TimpleTuning, TIMPLE_TUNING_MIDI } from './tuning';
@@ -206,6 +208,111 @@ describe('buildMockDocument — confidence and naming', () => {
           midiToPitchName(event.musical_data.midi_note),
         );
       }
+    }
+  });
+});
+
+function patchEvent(
+  doc: TimpleDocument,
+  eventId: string,
+  patch: (e: TimpleDocument['measures'][number]['events'][number]) =>
+    TimpleDocument['measures'][number]['events'][number],
+): TimpleDocument {
+  return {
+    ...doc,
+    measures: doc.measures.map((m) => ({
+      ...m,
+      events: m.events.map((e) => (e.event_id === eventId ? patch(e) : e)),
+    })),
+  };
+}
+
+describe('routeDocument', () => {
+  it('preserves user-locked positions and re-routes the rest', () => {
+    const doc = buildMockDocument(ISA_SENCILLA_EN_DO, { documentId: 'reroute' });
+    // Pin the first C5 to its open-string voicing on string 4 fret 0.
+    const locked = patchEvent(doc, 'evt-001', (e) => ({
+      ...e,
+      tab_data: {
+        ...e.tab_data,
+        selected: { string: 4, fret: 0 },
+        is_user_locked: true,
+      },
+    }));
+
+    const rerouted = routeDocument(locked);
+    const evt1 = rerouted.measures[0].events[0];
+
+    expect(evt1.tab_data.selected).toEqual({ string: 4, fret: 0 });
+    expect(evt1.tab_data.is_user_locked).toBe(true);
+    // Surrounding events still resolve to valid positions for their pitch.
+    for (const measure of rerouted.measures) {
+      for (const event of measure.events) {
+        const playable = findPositions(event.musical_data.midi_note, tuning);
+        expect(playable).toContainEqual(event.tab_data.selected);
+      }
+    }
+  });
+
+  it('regenerates the alternatives list to exclude the new selection', () => {
+    const doc = buildMockDocument(ISA_SENCILLA_EN_DO, { documentId: 'reroute' });
+    const locked = patchEvent(doc, 'evt-001', (e) => ({
+      ...e,
+      tab_data: {
+        ...e.tab_data,
+        selected: { string: 5, fret: 5 },
+        is_user_locked: true,
+      },
+    }));
+
+    const rerouted = routeDocument(locked);
+    const evt1 = rerouted.measures[0].events[0];
+
+    expect(evt1.tab_data.selected).toEqual({ string: 5, fret: 5 });
+    for (const alt of evt1.tab_data.alternatives) {
+      expect(alt).not.toEqual({ string: 5, fret: 5 });
+    }
+    // selected ∪ alternatives === every playable position for that pitch
+    const playable = findPositions(evt1.musical_data.midi_note, tuning);
+    const reconstructed = [evt1.tab_data.selected, ...evt1.tab_data.alternatives];
+    expect(reconstructed).toHaveLength(playable.length);
+  });
+
+  it('keeps the lowest-note guarantee under re-routing', () => {
+    // Lock an unrelated event high up; E4 must still resolve to string 3 fret 0.
+    const doc = buildMockDocument(ISA_SENCILLA_EN_DO, { documentId: 'reroute' });
+    const locked = patchEvent(doc, 'evt-001', (e) => ({
+      ...e,
+      tab_data: {
+        ...e.tab_data,
+        selected: { string: 5, fret: 5 },
+        is_user_locked: true,
+      },
+    }));
+
+    const rerouted = routeDocument(locked);
+    const e4Events = rerouted.measures
+      .flatMap((m) => m.events)
+      .filter((e) => e.musical_data.midi_note === 64);
+    expect(e4Events.length).toBeGreaterThan(0);
+    for (const event of e4Events) {
+      expect(event.tab_data.selected).toEqual({ string: 3, fret: 0 });
+    }
+  });
+
+  it('preserves event ids, timings and confidence values', () => {
+    const doc = buildMockDocument(ISA_SENCILLA_EN_DO, { documentId: 'reroute' });
+    const rerouted = routeDocument(doc);
+
+    const original = doc.measures.flatMap((m) => m.events);
+    const after = rerouted.measures.flatMap((m) => m.events);
+    expect(after).toHaveLength(original.length);
+    for (let i = 0; i < original.length; i++) {
+      expect(after[i].event_id).toBe(original[i].event_id);
+      expect(after[i].start_time).toBe(original[i].start_time);
+      expect(after[i].duration).toBe(original[i].duration);
+      expect(after[i].omr_confidence).toEqual(original[i].omr_confidence);
+      expect(after[i].musical_data).toEqual(original[i].musical_data);
     }
   });
 });
