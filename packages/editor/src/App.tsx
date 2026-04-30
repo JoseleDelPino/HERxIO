@@ -3,6 +3,7 @@ import {
   ISA_SENCILLA_EN_DO,
   buildMockDocument,
   type DurationCode,
+  type Position,
   type StringNumber,
 } from '@herxio/timple-core';
 import { MeasureView } from './components/MeasureView';
@@ -94,6 +95,18 @@ export function App() {
     [],
   );
 
+  const handleSelect = useCallback((id: string | null) => {
+    dispatch({ type: 'select', id });
+  }, []);
+
+  const handlePickAlternative = useCallback((id: string, position: Position) => {
+    dispatch({ type: 'change-position', id, position });
+  }, []);
+
+  const handleToggleLock = useCallback((id: string) => {
+    dispatch({ type: 'toggle-lock', id });
+  }, []);
+
   const totalEvents = state.doc.measures.reduce(
     (sum, m) => sum + m.events.length,
     0,
@@ -140,18 +153,16 @@ export function App() {
               measure={measure}
               isFirst={idx === 0}
               flashId={state.invalidFlashId}
-              onSelect={(id) => dispatch({ type: 'select', id })}
+              onSelect={handleSelect}
               onDragNote={handleDragNote}
             />
             <EditRow
               measure={measure}
               selectedId={state.selectedId}
               flashId={state.invalidFlashId}
-              onSelect={(id) => dispatch({ type: 'select', id })}
-              onPickAlternative={(id, position) =>
-                dispatch({ type: 'change-position', id, position })
-              }
-              onToggleLock={(id) => dispatch({ type: 'toggle-lock', id })}
+              onSelect={handleSelect}
+              onPickAlternative={handlePickAlternative}
+              onToggleLock={handleToggleLock}
             />
           </section>
         ))}

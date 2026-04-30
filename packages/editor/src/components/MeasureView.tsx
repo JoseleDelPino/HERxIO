@@ -92,15 +92,19 @@ export function MeasureView({
   onSelect,
   onDragNote,
 }: MeasureViewProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
+  // Two separate refs: VexFlow owns `svgRef` and we may wipe its innerHTML
+  // freely; React owns `wrapperRef` (which also holds the drag-hint overlay)
+  // and must never have its DOM subtree replaced behind its back.
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const svgRef = useRef<HTMLDivElement>(null);
   const [dragHint, setDragHint] = useState<DragHint | null>(null);
 
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-    container.innerHTML = '';
+    const svgContainer = svgRef.current;
+    if (!svgContainer) return;
+    svgContainer.innerHTML = '';
 
-    const renderer = new Renderer(container, Renderer.Backends.SVG);
+    const renderer = new Renderer(svgContainer, Renderer.Backends.SVG);
     renderer.resize(CANVAS_WIDTH, CANVAS_HEIGHT);
     const ctx = renderer.getContext();
 
@@ -149,7 +153,7 @@ export function MeasureView({
       const onPointerDown = (downEvent: Event) => {
         const pe = downEvent as PointerEvent;
         pe.preventDefault();
-        beginDrag(pe, event, container, tabStave, svgEl, setDragHint, onDragNote);
+        beginDrag(pe, event, svgContainer, tabStave, svgEl, setDragHint, onDragNote);
         onSelect?.(event.event_id);
       };
       svgEl.addEventListener('pointerdown', onPointerDown);
@@ -162,7 +166,8 @@ export function MeasureView({
   }, [measure, isFirst, flashId, onSelect, onDragNote]);
 
   return (
-    <div className="measure__canvas" ref={containerRef}>
+    <div className="measure__canvas" ref={wrapperRef}>
+      <div className="measure__svg" ref={svgRef} />
       {dragHint && (
         <div
           className={`drag-hint${dragHint.valid ? '' : ' drag-hint--invalid'}`}

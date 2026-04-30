@@ -93,6 +93,10 @@ body {
 .measure__canvas {
   position: relative;
   width: 100%;
+}
+
+.measure__svg {
+  width: 100%;
   overflow-x: auto;
 }
 
